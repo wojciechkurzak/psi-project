@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native'
 import CalcButton from '../components/CalcButton'
 import DisplayValue from '../components/DisplayValue'
 import GenderButton from '../components/GenderButton'
+import { storeHistory } from '../config/asyncStorage'
 
 const BmiScreen = () => {
 	const [height, setHeight] = useState('')
@@ -20,7 +21,7 @@ const BmiScreen = () => {
 				(parseFloat(weight) / Math.pow(parseFloat(height) / 100, 2)) *
 					10
 			) / 10
-		setBmi(value.toString())
+		return value
 	}
 
 	const calculateIdealWeight = () => {
@@ -28,13 +29,21 @@ const BmiScreen = () => {
 			Math.round(
 				(parseFloat(height) - 100) * (gender.male ? 0.9 : 0.85) * 10
 			) / 10
-		setIdealWeight(value.toString())
+		return value
 	}
 
 	const displayValues = () => {
 		if (!height || !weight || (!gender.male && !gender.female)) return
-		calculateBmi()
-		calculateIdealWeight()
+		const calculatedBmi = calculateBmi()
+		const calculatedIdealWeight = calculateIdealWeight()
+		setBmi(calculatedBmi)
+		setIdealWeight(calculatedIdealWeight)
+		storeHistory('BmiHistory', {
+			gender: gender.male ? 'male' : 'female',
+			height: height,
+			weight: weight,
+			bmi: calculatedBmi,
+		})
 	}
 
 	return (
@@ -70,12 +79,17 @@ const BmiScreen = () => {
 				placeholderTextColor={'#fff'}
 			/>
 			<CalcButton text="Calculate" onPress={displayValues} />
-			{bmi && idealWeight && (
-				<View style={styles.valuesContainer}>
-					<DisplayValue title="BMI" value={bmi} />
-					<DisplayValue title="Perfect weight" value={idealWeight} />
-				</View>
-			)}
+			<View style={styles.valuesContainer}>
+				{bmi && idealWeight && (
+					<>
+						<DisplayValue title="BMI" value={bmi} />
+						<DisplayValue
+							title="Perfect weight"
+							value={idealWeight}
+						/>
+					</>
+				)}
+			</View>
 		</View>
 	)
 }
@@ -101,6 +115,7 @@ const styles = StyleSheet.create({
 		color: '#fff',
 	},
 	valuesContainer: {
+		height: 100,
 		marginTop: 30,
 		flexDirection: 'row',
 		justifyContent: 'space-around',
