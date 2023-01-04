@@ -9,7 +9,7 @@ export const getHistory = async (key) => {
 export const storeHistory = async (key, value) => {
 	const history = await getHistory(key)
 	let newHistory = [value, ...history]
-	if (newHistory.length > 5) newHistory.pop()
+	if (newHistory.length > 6) newHistory.pop()
 	const jsonValue = JSON.stringify(newHistory)
 	await AsyncStorage.setItem(key, jsonValue)
 }
