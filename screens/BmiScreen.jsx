@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
 import CalcButton from '../components/CalcButton'
+import ClearButton from '../components/ClearButton'
 import DisplayValue from '../components/DisplayValue'
 import GenderButton from '../components/GenderButton'
 import { storeHistory } from '../config/asyncStorage'
@@ -47,6 +48,14 @@ const BmiScreen = () => {
 		})
 	}
 
+	const clearValues = () => {
+		setHeight('')
+		setWeight('')
+		setGender({ male: false, female: false })
+		setBmi('')
+		setIdealWeight('')
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.genderContainer}>
@@ -80,17 +89,18 @@ const BmiScreen = () => {
 				placeholderTextColor={'#fff'}
 			/>
 			<CalcButton text="Calculate" onPress={displayValues} />
-			<View style={styles.valuesContainer}>
-				{bmi && idealWeight && (
-					<>
+			{bmi && idealWeight && (
+				<>
+					<View style={styles.valuesContainer}>
 						<DisplayValue title="BMI" value={bmi} />
 						<DisplayValue
 							title="Perfect weight"
 							value={idealWeight}
 						/>
-					</>
-				)}
-			</View>
+					</View>
+					<ClearButton text="Clear" onPress={clearValues} />
+				</>
+			)}
 		</View>
 	)
 }
@@ -116,7 +126,6 @@ const styles = StyleSheet.create({
 		color: '#fff',
 	},
 	valuesContainer: {
-		height: 100,
 		marginTop: 30,
 		flexDirection: 'row',
 		justifyContent: 'space-around',

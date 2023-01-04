@@ -9,6 +9,7 @@ import uuid from 'react-native-uuid'
 import PromilCard from '../components/PromilCard'
 import DisplayValue from '../components/DisplayValue'
 import { storeHistory } from '../config/asyncStorage'
+import ClearButton from '../components/ClearButton'
 
 const PromilScreen = () => {
 	const [gender, setGender] = useState({
@@ -81,6 +82,16 @@ const PromilScreen = () => {
 		})
 	}
 
+	const clearValues = () => {
+		setGender({ male: false, female: false })
+		setWeight('')
+		setMililiters('')
+		setPercentage('')
+		setItems([])
+		setPromils('')
+		setSoberTime('')
+	}
+
 	const renderItem = ({ item }) => (
 		<PromilCard item={item} removeItem={removeItem} />
 	)
@@ -131,10 +142,14 @@ const PromilScreen = () => {
 			<ItemsList items={items} renderItem={renderItem} maxHeight={170} />
 			<CalcButton text="Calculate" onPress={displayValues} />
 			{promils && soberTime && (
-				<View style={styles.valuesContainer}>
-					<DisplayValue title="Promils" value={promils} />
-					<DisplayValue title="Sober time" value={soberTime} />
-				</View>
+				<>
+					<View style={styles.valuesContainer}>
+						<DisplayValue title="Promils" value={promils} />
+						<DisplayValue title="Sober time" value={soberTime} />
+					</View>
+
+					<ClearButton text="Clear" onPress={clearValues} />
+				</>
 			)}
 		</View>
 	)

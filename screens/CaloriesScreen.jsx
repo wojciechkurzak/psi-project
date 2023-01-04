@@ -4,6 +4,7 @@ import ItemsList from '../components/ItemsList'
 import CaloriesCard from '../components/CaloriesCard'
 import uuid from 'react-native-uuid'
 import AddButton from '../components/AddButton'
+import ClearButton from '../components/ClearButton'
 
 const CaloriesScreen = () => {
 	const [name, setName] = useState('')
@@ -38,6 +39,12 @@ const CaloriesScreen = () => {
 		return totalCalories.toString()
 	}
 
+	const clearValues = () => {
+		setName('')
+		setCalories('')
+		setItems([])
+	}
+
 	return (
 		<View style={styles.constainer}>
 			<Text style={styles.topText}>{calculateCalories()} kcal</Text>
@@ -59,7 +66,10 @@ const CaloriesScreen = () => {
 				/>
 				<AddButton onPress={addItem} />
 			</View>
-			<ItemsList items={items} renderItem={renderItem} maxHeight={420} />
+			<ItemsList items={items} renderItem={renderItem} />
+			{items.length !== 0 && (
+				<ClearButton text="Clear" onPress={clearValues} />
+			)}
 		</View>
 	)
 }
