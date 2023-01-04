@@ -66,12 +66,13 @@ const PromilScreen = () => {
 	}
 
 	const displayValues = () => {
-		if ((!gender.male && !gender.female) || !weight || !items) return
+		if ((!gender.male && !gender.female) || !weight || items.length === 0)
+			return
 		const grams = calculateGrams()
 		const calculatedPromil = calculatePromil(grams)
 		const calculatedSoberTime = calculateSoberTime(grams)
-		setPromils(calculatedPromil)
-		setSoberTime(calculatedSoberTime)
+		setPromils(calculatedPromil.toString())
+		setSoberTime(calculatedSoberTime.toString())
 		storeHistory('PromilHistory', {
 			gender: gender.male ? 'male' : 'female',
 			weight: weight,
