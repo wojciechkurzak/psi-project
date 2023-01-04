@@ -3,9 +3,10 @@ import { View, StyleSheet, FlatList, Text } from 'react-native'
 import { useEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { getHistory } from '../config/asyncStorage'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 const BmiHistoryScreen = () => {
-	const [history, setHistory] = useState(null)
+	const [history, setHistory] = useState([])
 
 	const renderItem = ({ item }) => (
 		<View style={styles.historyItem}>
@@ -34,12 +35,15 @@ const BmiHistoryScreen = () => {
 		getItems()
 	}, [])
 
-	return (
-		history && (
-			<View style={styles.historyContainer}>
-				<FlatList data={history} renderItem={renderItem} />
-			</View>
-		)
+	return history.length > 0 ? (
+		<View style={styles.historyContainer}>
+			<FlatList data={history} renderItem={renderItem} />
+		</View>
+	) : (
+		<View style={styles.historyErrorContainer}>
+			<FontAwesome5 name="history" size={22} color="#999" />
+			<Text style={styles.historyError}>No history</Text>
+		</View>
 	)
 }
 
@@ -49,11 +53,19 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 20,
 	},
-	historyTitle: {
-		color: '#fff',
-		fontSize: 18,
+	historyErrorContainer: {
+		backgroundColor: '#0a0e21',
+		flex: 1,
+		paddingHorizontal: 20,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	historyError: {
+		color: '#999',
+		fontSize: 22,
 		textAlign: 'center',
 		marginVertical: 12,
+		alignSelf: 'center',
 	},
 	historyItem: {
 		width: '100%',
