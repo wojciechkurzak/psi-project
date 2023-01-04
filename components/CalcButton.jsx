@@ -1,9 +1,20 @@
 import React from 'react'
-import { TouchableNativeFeedback, View, Text, StyleSheet } from 'react-native'
+import {
+	TouchableNativeFeedback,
+	View,
+	Text,
+	StyleSheet,
+	Keyboard,
+} from 'react-native'
 
 const CalcButton = ({ text, onPress }) => {
 	return (
-		<TouchableNativeFeedback onPress={() => onPress()}>
+		<TouchableNativeFeedback
+			onPress={() => {
+				onPress()
+				Keyboard.dismiss()
+			}}
+		>
 			<View style={styles.buttonContainer}>
 				<Text style={styles.text}>{text}</Text>
 			</View>
