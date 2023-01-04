@@ -23,7 +23,7 @@ const BmiHistoryScreen = () => {
 			<View style={styles.bottomContainer}>
 				<Text style={styles.historyBottomText}>BMI: {item.bmi}</Text>
 				<Text style={styles.historyBottomText}>
-					Perfect weight: {item.idealWeight}
+					Perfect weight: {item.idealWeight}kg
 				</Text>
 			</View>
 		</View>
