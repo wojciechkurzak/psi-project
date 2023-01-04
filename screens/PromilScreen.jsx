@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import AddButton from '../components/AddButton'
 import CalcButton from '../components/CalcButton'
@@ -8,6 +8,7 @@ import ItemsList from '../components/ItemsList'
 import uuid from 'react-native-uuid'
 import PromilCard from '../components/PromilCard'
 import DisplayValue from '../components/DisplayValue'
+import { storeHistory } from '../config/asyncStorage'
 
 const PromilScreen = () => {
 	const [gender, setGender] = useState({
@@ -56,19 +57,27 @@ const PromilScreen = () => {
 			Math.round(
 				(grams / ((gender.male ? 0.7 : 0.6) * parseFloat(weight))) * 100
 			) / 100
-		setPromils(promil.toString())
+		return promil
 	}
 
 	const calculateSoberTime = (grams) => {
 		const soberTime = Math.round(grams / 10)
-		setSoberTime(soberTime.toString())
+		return soberTime
 	}
 
 	const displayValues = () => {
 		if ((!gender.male && !gender.female) || !weight || !items) return
 		const grams = calculateGrams()
-		calculatePromil(grams)
-		calculateSoberTime(grams)
+		const calculatedPromil = calculatePromil(grams)
+		const calculatedSoberTime = calculateSoberTime(grams)
+		setPromils(calculatedPromil)
+		setSoberTime(calculatedSoberTime)
+		storeHistory('PromilHistory', {
+			gender: gender.male ? 'male' : 'female',
+			weight: weight,
+			promil: calculatedPromil,
+			soberTime: calculatedSoberTime,
+		})
 	}
 
 	const renderItem = ({ item }) => (

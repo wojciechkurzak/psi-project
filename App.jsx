@@ -10,6 +10,7 @@ import CaloriesScreen from './screens/CaloriesScreen'
 import { StatusBar } from 'react-native'
 import BmiHistoryScreen from './screens/BmiHistoryScreen'
 import HistoryButton from './components/HistoryButton'
+import PromilHistoryScreen from './screens/PromilHistoryScreen'
 
 const Stack = createStackNavigator()
 
@@ -60,6 +61,9 @@ const App = () => {
 						options={{
 							...screenOptions,
 							title: 'Promil calculator',
+							headerRight: () => (
+								<HistoryButton route="PromilHistory" />
+							),
 						}}
 					/>
 					<Stack.Screen
@@ -73,6 +77,14 @@ const App = () => {
 					<Stack.Screen
 						name="BmiHistory"
 						component={BmiHistoryScreen}
+						options={{
+							...screenOptions,
+							title: 'History',
+						}}
+					/>
+					<Stack.Screen
+						name="PromilHistory"
+						component={PromilHistoryScreen}
 						options={{
 							...screenOptions,
 							title: 'History',
