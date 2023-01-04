@@ -43,6 +43,7 @@ const BmiScreen = () => {
 			height: height,
 			weight: weight,
 			bmi: calculatedBmi,
+			idealWeight: calculatedIdealWeight,
 		})
 	}
 

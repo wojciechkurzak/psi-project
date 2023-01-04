@@ -22,6 +22,9 @@ const BmiHistoryScreen = () => {
 			</View>
 			<View style={styles.bottomContainer}>
 				<Text style={styles.historyBottomText}>BMI: {item.bmi}</Text>
+				<Text style={styles.historyBottomText}>
+					Perfect weight: {item.idealWeight}
+				</Text>
 			</View>
 		</View>
 	)
@@ -95,8 +98,10 @@ const styles = StyleSheet.create({
 		borderTopRightRadius: 8,
 	},
 	bottomContainer: {
+		width: '100%',
+		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		height: 40,
 	},
 })
