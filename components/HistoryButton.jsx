@@ -17,7 +17,7 @@ const HistoryButton = ({ route }) => {
 
 const styles = StyleSheet.create({
 	iconContainer: {
-		marginRight: 14,
+		marginRight: 18,
 	},
 })
 
