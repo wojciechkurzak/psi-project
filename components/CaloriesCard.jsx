@@ -7,7 +7,7 @@ const CaloriesCard = ({ item, removeItem }) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>{item.name}</Text>
-			<Text style={styles.text}>{item.calories} kcal</Text>
+			<Text style={styles.text}>{item.calories}kcal</Text>
 			<TouchableWithoutFeedback onPress={() => removeItem(item.id)}>
 				<Icon name="close" color="#fff" size={24} />
 			</TouchableWithoutFeedback>

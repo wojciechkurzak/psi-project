@@ -1,11 +1,14 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const DisplayValue = ({ title, value }) => {
+const DisplayValue = ({ title, value, unit }) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.upperText}>{title}</Text>
-			<Text style={styles.bottomText}>{value}</Text>
+			<Text style={styles.bottomText}>
+				{value}
+				{unit}
+			</Text>
 		</View>
 	)
 }

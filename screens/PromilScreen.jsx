@@ -145,7 +145,11 @@ const PromilScreen = () => {
 				<>
 					<View style={styles.valuesContainer}>
 						<DisplayValue title="Promils" value={promils} />
-						<DisplayValue title="Sober time" value={soberTime} />
+						<DisplayValue
+							title="Sober time"
+							value={soberTime}
+							unit="h"
+						/>
 					</View>
 
 					<ClearButton text="Clear" onPress={clearValues} />

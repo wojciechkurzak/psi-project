@@ -96,6 +96,7 @@ const BmiScreen = () => {
 						<DisplayValue
 							title="Perfect weight"
 							value={idealWeight}
+							unit="kg"
 						/>
 					</View>
 					<ClearButton text="Clear" onPress={clearValues} />
