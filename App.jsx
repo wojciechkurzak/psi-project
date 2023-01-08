@@ -60,7 +60,7 @@ const App = () => {
 						component={PromilScreen}
 						options={{
 							...screenOptions,
-							title: 'Promil calculator',
+							title: 'BAC calculator',
 							headerRight: () => (
 								<HistoryButton route="PromilHistory" />
 							),

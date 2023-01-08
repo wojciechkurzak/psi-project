@@ -7,7 +7,7 @@ const HomeScreen = () => {
 		<View style={styles.container}>
 			<Text style={styles.text}>Choose calculator</Text>
 			<NavigationButton text="BMI calculator" route="Bmi" />
-			<NavigationButton text="Promil calculator" route="Promil" />
+			<NavigationButton text="BAC calculator" route="Promil" />
 			<NavigationButton text="Calories calculator" route="Calories" />
 		</View>
 	)
