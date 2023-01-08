@@ -5,7 +5,7 @@ import NavigationButton from '../components/NavigationButton'
 const HomeScreen = () => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}>Hello</Text>
+			<Text style={styles.text}>Choose calculator</Text>
 			<NavigationButton text="BMI calculator" route="Bmi" />
 			<NavigationButton text="Promil calculator" route="Promil" />
 			<NavigationButton text="Calories calculator" route="Calories" />
