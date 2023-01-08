@@ -12,7 +12,7 @@ const CaloriesScreen = () => {
 	const [items, setItems] = useState([])
 
 	const addItem = () => {
-		if (name.length === 0 || calories.length === 0) return
+		if (name.length === 0 || calories.length === 0 || calories <= 0) return
 		const newItem = [
 			...items,
 			{

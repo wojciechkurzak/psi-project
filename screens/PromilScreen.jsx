@@ -24,7 +24,13 @@ const PromilScreen = () => {
 	const [soberTime, setSoberTime] = useState('')
 
 	const addItem = () => {
-		if (mililiters.length === 0 || percentage.length === 0) return
+		if (
+			mililiters.length === 0 ||
+			percentage.length === 0 ||
+			mililiters <= 0 ||
+			percentage <= 0
+		)
+			return
 		const newItem = [
 			...items,
 			{
@@ -67,7 +73,12 @@ const PromilScreen = () => {
 	}
 
 	const displayValues = () => {
-		if ((!gender.male && !gender.female) || !weight || items.length === 0)
+		if (
+			(!gender.male && !gender.female) ||
+			!weight ||
+			items.length === 0 ||
+			weight <= 0
+		)
 			return
 		const grams = calculateGrams()
 		const calculatedPromil = calculatePromil(grams)

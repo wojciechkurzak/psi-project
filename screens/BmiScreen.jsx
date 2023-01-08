@@ -34,7 +34,14 @@ const BmiScreen = () => {
 	}
 
 	const displayValues = () => {
-		if (!height || !weight || (!gender.male && !gender.female)) return
+		if (
+			!height ||
+			!weight ||
+			(!gender.male && !gender.female) ||
+			height <= 0 ||
+			weight <= 0
+		)
+			return
 		const calculatedBmi = calculateBmi()
 		const calculatedIdealWeight = calculateIdealWeight()
 		setBmi(calculatedBmi.toString())
